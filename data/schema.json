@@ -1,0 +1,635 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "None",
+    "title": "ATLAS transient event",
+    "description": "Data returned by ATLAS API when requesting data for *one* event",
+    "type": "JSON",
+    "properties": {
+        "object": {
+            "description": "General information about the object a.k.a event",
+            "type": "JSON",
+            "properties": {
+                "id": {"description":"19 digit ATLAS transient event index",
+                    "type": "integer"
+                },
+                "followup_id": {"description":"Number given to any event promoted to eyeball list (sequential and unique but not an index in a table)", 
+                    "type": "integer"
+                },
+                "followup_flag_date": {"description":"Date it was put in the eyeball list",
+                    "type": "date and time"
+                },
+                "detection_id": {"description":"Index to detections table in database. ",
+                    "type": "integer"
+                },
+                "ra": {"description":"Right Ascention - degrees. Recorded RA of detection that is closest to the mean RA+DEC of all detections on the first night. ", 
+                    "type": "float"
+                },
+                "dec": {"description":"Declination - degrees. Recorded Dec of detection that is closes to the mean RA+DEC of all detectoins on the first night. ", 
+                    "type": "float"
+                },
+                "object_classification": {"description":"Deprecated", 
+                    "type": "None"
+                },
+                "sherlockClassification": {"description":"Label given by Sherlock (latest if updated)", 
+                    "type": "string"
+                },
+                "observation_status": {"description":"Classification determined through follow up spectroscopy", 
+                    "type":"string"
+                },
+                "htm16id": {"description":"Internal triangle ID in htm scheme (level 16) - sky grid.",
+                    "type":"integer"
+                },
+                "jtindex": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "images_id": {"description":"Index of the group of three images shown on ATLAS server lists for this object (observed, wallpaper, difference)", 
+                    "type":"integer"
+                },
+                "date_inserted": {"description":"When the event was added to the database.", 
+                    "type": "date and time"
+                },
+                "date_modified": {"description":"Last modification", 
+                    "type":"date and time"
+                },
+                "processing_flags": {"description":"KEN TO GIVE ME LIST OF FLAGS (e.g. moons stamps eph) - representation of a binary flag in the decimal system",
+                    "type":"integer"
+                },
+                "updated_by": {"description":"ATLAS server user ID (name.lastname) of last updater", 
+                    "type":"string"
+                },
+                "followup_priority": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "external_reference_id": {"description":"KEN TO CHECK", 
+                    "type":"KEN TO CHECK"
+                },
+                "detection_list_id": {"description":"Which list it is currently in. | 1: Follow up | 2: Good | 3: Possible | 4: Attic | 5: Eyeball ", 
+                    "type":"integer"
+                },
+                "survey_field": {"description":"ATLAS (always ATLAS)", 
+                    "type":"string"
+                },
+                "followup_counter": {"description":"Name server counter. Semi-deprecated", 
+                    "type": "integer"
+                },
+                "atlas_designation": {"description":"ATLAS name in format {ATLASXXyyyy} XX:year, yyyy: letters to make unique ID", 
+                    "type":"string"
+                },
+                "other_designation": {"description":"TNS name (if the object was named by ATLAS). If ZTF named it, this will be None. ", 
+                    "type":"string"
+                },
+                "current_trend": {"description":"A short description of wether the event is rising or falling. Mag difference between latest and FIRST detection (not the one immediately before!).", 
+                    "type":"string"
+                },
+                "local_comments": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "ndetections": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "realbogus_factor": {"description":"RBF score between 0 (bogus) and 1 (real) given by the OLD CLASSIFIER", 
+                    "type":"float"
+                },
+                "rb_pix": {"description":"RBF score between 0 (bogus) and 1 (real) given by NEW CLASSIFIER.",
+                    "type":"float"
+                }
+            }
+        },
+        "lc": {
+            "description":"Light curve of detections for the event",
+            "type": "List (of dictionaries). Length = number of data points",
+            "properties":{
+                "id": {"description":"19 digit ATLAS transient server index",
+                    "type":"integer"
+                },
+                "mag": {"description":"Apparent magnitude (AB)", 
+                    "type":"float"
+                },
+                "magerr": {"description":"Magnitude error", 
+                    "type":"float"
+                },
+                "mjd": {"description":"Modified Julian Date", 
+                    "type":"float"
+                },
+                "exptime": {"description":"Exposure time (seconds)", 
+                    "type": "float"
+                },
+                "filter": {"description":"Filter (o - orange, c - cyan)",
+                    "type":"string"
+                },
+                "zp": {"description":"Zero point of the field.", 
+                    "type":"string"
+                },
+                "expname": {"description":" [XX][a/r][YYYYY]o[ZZZZ][o/c/t] - X: location | a/r: name of camera | YYYYY: MJD at start of night | o: observation | ZZZZ: Integer ID of the exposure. Starts at 1 every night and increases sequentially | o/c/t: filter |",
+                    "type":"string"
+                },
+                "ra": {"description":"Right Ascention - degrees. Centroid for this detection.",
+                    "type": "float"
+                },
+                "dec": {"description":"Declination - degrees. Centroid for this detection.",
+                    "type":"float"
+                },
+                "atlas_metadata_id": {"description":"Index to the fits header table. ",
+                    "type":"integer"
+                },
+                "pointing": {"description":"tiling ID",
+                    "type":"string"
+                },
+                "mag5sig": {"description":"5 sigma limiting magnitude for that exposure (AB mag)", 
+                    "type": "float"
+                },
+                "x": {"description":"Location on the chip (pixels)",
+                    "type":"float"
+                },
+                "y": {"description":"Location on the chip (pixels)", 
+                    "type":"float"
+                },
+                "major": {"description":"FWHM of PSF (long axis)", 
+                    "type":"float"
+                },
+                "minor": {"description":"FWHM of PSF (short axis)", 
+                    "type":"float"
+                },
+                "phi": {"description":"Angle (degrees) of the major axis counter-clockwise from the x-axis", 
+                    "type":"float"
+                },
+                "det": {"description":"Type of detection: KEN TO CHECK", 
+                    "type":"integer"
+                },
+                "chin": {"description":"Reduced chi squared of the PSF fit. ", 
+                    "type":"float"
+                },
+                "pvr": {"description":"P(variable)", 
+                    "type":"integer"
+                },
+                "ptr": {"description":"P(transient)", 
+                    "type":"integer"
+                },
+                "pmv": {"description":"P(mover)", 
+                    "type":"integer"
+                },
+                "pkn": {"description":"P(known) 0: Not, 999: Known", 
+                    "type":"integer"
+                },
+                "pno": {"description":"P(noise)", 
+                    "type":"integer"
+                },
+                "pbn": {"description":"P(burn)", 
+                    "type":"integer"
+                },
+                "pcr": {"description":"P(cosmic ray)", 
+                    "type":"integer"
+                },
+                "pxt": {"description":"P(cross-talk)", 
+                    "type":"integer"
+                },
+                "psc": {"description":"P(scar)", 
+                    "type":"integer"
+                },
+                "dup": {"description":"Duplicate. 0 or -1 or ??? KEN TO CHECK", 
+                    "type":"integer"
+                },
+                "wpflx": {"description":"Wallpaper flux (forced) at position of transient. Units? KEN TO CHECK", 
+                    "type":"float"
+                },
+                "dflx": {"description":"Error on wallpaper flux.",
+                    "type":"float"
+                }
+            }
+        },
+        "lcnondets": {
+            "description":"Lightcurve of non-detections",
+            "type":"List (of dictionaries)",
+            "properties": {
+                "id": {"description":"Primary key for this exposure in the ATLAS metadata table.", 
+                    "type":"integer"
+                },
+                "mjd": {"description":"Modified Julian Date of acquisition",
+                    "type":"float"
+                },
+                "exptime": {"description":"Exposure time (seconds)", 
+                    "type":"float"
+                },
+                "filter": {"description":"Filter (o - orange; c - cyan)", 
+                    "type":"string"
+                },
+                "zp": {"description":"zero point for this exposure", 
+                    "type":"float"
+                },
+                "expname": {"description":"ATLAS exposure name XXyZZZZZoAAAAf - XX: location | y: chip code | ZZZZZ: whole number MJD | o: observation |AAAAA: exposure ID for that night for that telescope | f: filter (o, c, t, or others) ", 
+                    "type":"string"
+                },
+                "filename": {"description":"[expname].ddc", 
+                    "type":"string"
+                },
+                "input": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "reference": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "pointing": {"description":"Tile on the sky currently being observed or object if dedicated follow-up and bespoke pointing", 
+                    "type":"string"
+                },
+                "mag5sig": {"description":"5 sigma magnitude limit for this field (AB)",
+                    "type":"float"
+                }
+            }
+        },
+        "fp":{
+            "description": "Forced Photometry Lightcurve",
+            "type": "List (of dictionaries)",
+            "properties": {
+                "id": {"description":"Primary key on the forced photometry table", 
+                    "type":"integer"
+                },
+                "atlas_object_id": {"description":"19 digit ATLAS transient event index", 
+                    "type":"integer"
+                },
+                "expname": {"description":"ATLAS exposure name XXyZZZZZoAAAAf - XX: location | y: chip code | ZZZZZ: whole number MJD | o: observation |AAAAA: e    xposure ID for that night for that telescope | f: filter (o, c, t, or others) ", 
+                    "type":"string"
+                },
+                "mjd_obs": {"description":"Modified Julian Date", 
+                    "type":"float"
+                },
+                "ra": {"description":"Right Ascention - degrees. Mean RA of all previous detections in the raw photometry [not just the detections corresponding to that night]", 
+                    "type":"float"
+                },
+                "dec": {"description":"Declination - degrees. Mean Dec of all previous detections in the raw photometry [not just the detections corresponding to that night]", 
+                    "type":"float"
+                },
+                "filter": {"description":"Filter (o - orange; c - cyan; t - tomato)",
+                    "type":"string"
+                },
+                "mag": {"description":"Forced apparent magnitude - AB", 
+                    "type":"float"
+                },
+                "dm": {"description":"Magnitude errors", 
+                    "type":"float"
+                },
+                "snr": {"description":"Signal to noise ratio", 
+                    "type":"float"
+                },
+                "zp": {"description":"Zero Point", 
+                    "type":"float"
+                },
+                "x": {"description":"x central position [pix, left pixel center is 0.5]", 
+                    "type":"float"
+                },
+                "y": {"description":"Y central position [pix, left pixel center is 0.5]", 
+                    "type":"float"
+                },
+                "peakval": {"description":"data value of the brightest pixel [ADU]", 
+                    "type":"float"
+                },
+                "skyval": {"description":"robust estimate of the local sky [ADU]", 
+                    "type":"float"
+                },
+                "peakfit": {"description":"peak of the Waussian fit (in excess of sky) [ADU]", 
+                    "type":"float"
+                },
+                "dpeak": {"description":"uncertainty in the Waussian peak [ADU]", 
+                    "type":"float"
+                },
+                "skyfit": {"description":"sky value of the Waussian fit [ADU]", 
+                    "type":"float"
+                },
+                "flux": {"description":"net aperture flux of this object [ADU]", 
+                    "type":"float"
+                },
+                "dflux": {"description":"flux uncertainty [ADU]", 
+                    "type":"float"
+                },
+                "chin": {"description":"Reduced chisquared of the PSF fit", 
+                    "type":"float"
+                },
+                "major": {"description":"major axis FWHM (or trail length) [pix]", 
+                    "type":"float"
+                },
+                "minor": {"description":"minor axis FWHM (or trail FWHM) [pix]", 
+                    "type":"float"
+                },
+                "snrdet": {"description":"The signal to noise limit for the detection to be considered real", 
+                    "type":"float"
+                },
+                "snrlimit": {"description":"Magnitude limits for non detections are reported at this signal to noise ratio", 
+                    "type":"float"
+                },
+                "apfit": {"description":"Wingy Gaussian PSF fit correction in magnitudes. Details are magic - summon John Tonry's paper.", 
+                    "type":"float"
+                },
+                "date_inserted": {"description":"Date that this fp was inserted in database (even if the fp point corresponds to images taken 30 days ago)", 
+                    "type":"Date and time"
+                },
+                "limiting_mag": {"description":"Flag - whether this was a non detection in the raw photometry.", 
+                    "type":"bool"
+                },
+                "redo_photometry": {"description":"Not currently in use",
+                    "type":"bool"
+                }
+            }
+        },
+        "sherlock_crossmatches":{
+            "description": "Information on the Sherlock crossmatches associated with the transient. NOTE: The first entry is the a merged entry which cherry picks the best information from all catalogues (so if a galaxy has info in 3 catalogues it will be cross matched 3 times and the info from these catalogues will appear as separate entries in our list of dictionaries - the first entry in the list will be the combination of all the best info in those 3 entries)  ",
+            "type": "List of dictionaries",
+            "properties": {
+                "transient_object_id": {"description":"19 digit ATLAS transient event index", 
+                    "type":"integer"
+                },
+                "catalogue_object_id": {"description":"ID for the associated object in its home catalogue (e.g. Gaia)", 
+                    "type":"string"
+                },
+                "catalogue_table_id": {"description":"ID of the home catalogue within Sherlock", 
+                    "type":"integer"
+                },
+                "separationarcsec": {"description":"Projected separation (arcseconds) - diagonal of North and East separation", 
+                    "type":"float"
+                },
+                "northseparationarcsec": {"description":"North separation (arcseconds)", 
+                    "type":"float"
+                },
+                "eastseparationarcsec": {"description":"East separation (arcseconds)", 
+                    "type":"float"
+                },
+                "id": {"description":"ID for the associated object within Sherlock", 
+                    "type":"integer"
+                },
+                "z": {"description":"redshift", 
+                    "type":"float"
+                },
+                "scale": {"description":"scale factor in kpc/arcsec (to convert from angular separation to projected physical offset) - derived form the redshift", 
+                    "type":"float"
+                },
+                "distance": {"description":"distance in megaparsecs", 
+                    "type":"float"
+                },
+                "distance_modulus": {"description":"distance modulus (AB mag)", 
+                    "type":"float"
+                },
+                "photoz": {"description":"Photometric redshift", 
+                    "type":"float"
+                },
+                "photozerr": {"description":"photometric redshift error", 
+                    "type":"float"
+                },
+                "association_type": {"description":"Sherlock classification of the transient if it is indeed hosted with this crossmatch.", 
+                    "type":"string"
+                },
+                "datecreated": {"description":"Ignore - this is for bookkeeping only", 
+                    "type":"date and time or None"
+                },
+                "physical_separation_kpc": {"description":"Projected physical separation calculated from on sky separation and distance.", 
+                    "type":"float"
+                },
+                "catalogue_object_type": {"description":"star, galaxy, CV, AGN, QSO, UNCLEAR (typically faint sources at the limits of the survey), UNKNOWN (specific to the Guide Star Catalogue), CB (cataclysmic binary), OTHER (specific to NED, catch all for IR sources xray sources etc...)", 
+                    "type":"string"
+                },
+                "catalogue_object_subtype": {"description":"Some catalogues contain extra flags related to the source; these are recorded here. Likely useless outside of Sherlock.", 
+                    "type":"string"
+                },
+                "association_rank": {"description":"Deprecated", 
+                    "type":"None"
+                },
+                "catalogue_table_name": {"description":"Alias of the catalogue table name (displayed on webpage instead of horrendous phone number in DB)", 
+                    "type":"string"
+                },
+                "catalogue_view_name": {"description":"Name of the relevant view in the sherlock database", 
+                    "type":"string"
+                },
+                "rank": {"description":"Rankscored converted to ordered list. 1 is the best match to the transient. ", 
+                    "type":"int"
+                },
+                "rankscore": {"description":"Weighted transient association score. The higher, the more likely the underlying sources is associated with the transient. Note that there is no defined range for this quantity and typically the values go from 0-3000", 
+                    "type":"float"
+                },
+                "search_name": {"description":"The Sherlock algorithm contains many discrete searches to collect transient matches. Recording the search name helps with debugging.", 
+                    "type":"string"
+                },
+                "major_axis_arcsec": {"description":"FWHM of PSF long axis", 
+                    "type":"float"
+                },
+                "direct_distance": {"description":"Direct distance measurement extracted from the catalogue (if exists)", 
+                    "type":"float"
+                },
+                "direct_distance_scale": {"description":"scale factor in kpc/arcsec (to convert from angular separation to projected physical offset), provided by the catalogue.", 
+                    "type":"float"
+                },
+                "direct_distance_modulus": {"description":"distance moduls form the catalogue", 
+                    "type":"float"
+                },
+                "radeg": {"description":"Right Ascention in degrees", 
+                    "type":"float"
+                },
+                "decdeg": {"description":"Declination in degrees", 
+                    "type":"float"
+                },
+                "original_search_radius_arcsec": {"description":"Size of aperture used by Sherlock (centered on transient) to find cross matches.",
+                    "type":"float"
+                },
+                "catalogue_view_id": {"description":"ID of the view in Sherlock that this cross match lives in", 
+                    "type":"integer"
+                },
+                "u": {"description":"U magnitude", 
+                    "type":"float"
+                },
+                "uerr": {"description":"U mag error", 
+                    "type":"float"
+                },
+                "b": {"description":"B magnitude",
+                    "type":"float"
+                },
+                "berr": {"description":"B mag error",
+                    "type":"float"
+                },
+                "v": {"description":"V magnitude", 
+                    "type":"float"
+                }, 
+                "verr": {"description":"V mag error", 
+                    "type":"float"
+                }, 
+                "r": {"description":"R magnitude",  
+                    "type":"float"
+                },
+                "rerr": {"description":"R mag error",  
+                    "type":"float"
+                },
+                "i": {"description":"I magnitude",  
+                    "type":"float"
+                },
+                "ierr": {"description":"I mag error",  
+                    "type":"float"
+                },
+                "j": {"description":"J magnitude",  
+                    "type":"float"
+                },
+                "jerr": {"description":"J mag error",  
+                    "type":"float"
+                },
+                "h": {"description":"H magnitude",  
+                    "type":"float"
+                },
+                "herr": {"description":"H mag error",  
+                    "type":"float"
+                },
+                "k": {"description":"K magnitude",  
+                    "type":"float"
+                },
+                "kerr": {"description":"K mag error",  
+                    "type":"float"
+                },
+                "field_u": {"description":"u background mag limit",  
+                    "type":"float"
+                },
+                "field_uerr": {"description":"u background mag limit error",  
+                    "type":"float"
+                },
+                "field_g": {"description":"g background mag limit",  
+                    "type":"float"
+                },
+                "field_gerr": {"description":"g background mag limit error",  
+                    "type":"float"
+                },
+                "field_r": {"description":"r background mag limit", 
+                    "type":"float"
+                },
+                "field_rerr": {"description":"r background mag limit error",  
+                    "type":"float"
+                },
+                "field_i": {"description":"i background mag limit",  
+                    "type":"float"
+                },
+                "field_ierr": {"description":"i background mag limit error",  
+                    "type":"float"
+                },
+                "field_z": {"description":"z background mag limit",  
+                    "type":"float"
+                },
+                "field_zerr": {"description":"z background mag limit error",  
+                    "type":"float"
+                },
+                "field_y": {"description":"y background mag limit",  
+                    "type":"float"
+                },
+                "field_yerr": {"description":"y background mag limit error",  
+                    "type":"float"
+                },
+                "g": {"description":"g magnitude",  
+                    "type":"float"
+                },
+                "gerr": {"description":"g magnitude error",  
+                    "type":"float"
+                },
+                "unkmag": {"description":"Magnitude recorded in a catalogue that fails to mention which filter it's in",  
+                    "type":"float"
+                },
+                "unkmagerr": {"description":"Error associated with the above magnitude value.",  
+                    "type":"float"
+                },
+                "datelastmodified": {"description":"Ignore - for bookkeeping only",  
+                    "type":"float"
+                },
+                "updated": {"description":"0 or 1? Ignore - for bookkeeping only",  
+                    "type":"float"
+                },
+                "classificationreliability": {"description":"Not all catalogues are equal in quality, even within catalogues there are varying grades of quality. This helps generate rankscore",  
+                    "type":"float"
+                },
+                "transientabsmag": {"description":"Absolute Magnitude of the transient if it is indeed associated with this host. Uses the direct distance if available, otherwise uses redshift.", 
+                    "type":"float"
+                }
+            }
+        },
+        "sherlock_classifications":{
+            "description": "Sherlock Classification data",
+            "type": "List of dictionaries",
+            "properties": {
+                "transient_object_id": {"description":"19 digit integer ATLAS transient event index", 
+                    "type":"integer"
+                },
+                "classification": {"description":"One of: SN (Supernova), AGN (Active Galactic Nucleus), VS (Variable Star), BS (Bright Star), NT (Nuclear Transient), CV (Cataclysmic Variable), ORPHAN, UNCLEAR", 
+                    "type":"string"
+                },
+                "annotation": {"description":"String of text summarising the associated galaxy (if exists)", 
+                    "type":"string"
+                },
+                "summary": {"description":"String of text stating arcsec separation to associated galaxy", 
+                    "type":"string"
+                },
+                "matchverified": {"description":"to help debugging - ignore", 
+                    "type":"-"
+                },
+                "developmentcomment": {"description":"to help debugging - ignore", 
+                    "type":"-"
+                },
+                "datelastmodified": {"description":"Date of last update in UT", 
+                    "type":"Date and time"
+                },
+                "datecreated": {"description":"Date created in UT", 
+                    "type":"Date and time"
+                },
+                "updated": {"description":"O: Not updated, 1: Updated",
+                    "type":"bool integer"
+                }
+            }
+        },
+        "tns_crossmatches":{
+            "description": "Data from tcs_cross_matches_external where matched_list == Transient Name Server",
+            "type": "List of dictionaries",
+            "properties": {
+                "id": {"description":"DO NOT USE - ID of the tcs_cross_matches_external table on ATLAS server, which may have changed if updated", 
+                    "type":"integer"
+                },
+                "transient_object_id": {"description":"19 digit ATLAS transient event index", 
+                    "type":"integer"
+                },
+                "external_designation": {"description":"TNS name in format YEARabc (DOESN'T INCLUDE 'SN' PREFIX)", 
+                    "type":"string"
+                },
+                "type": {"description":"Type reported in TNS", 
+                    "type": "string"
+                },
+                "host_galaxy": {"description":"Host galaxy reported on TNS", 
+                    "type":"string"
+                },
+                "mag": {"description":"Discovery magnitude reported on TNS", 
+                    "type":"float"
+                },
+                "discoverer": {"description":"Discovery survey", 
+                    "type":"string"
+                },
+                "matched_list": {"description":"Transient Name Server", 
+                    "type":"string"
+                },
+                "other_info": {"description":"A comma serparted list of alternate IDs from other surveys", 
+                    "type":"string"
+                },
+                "separation": {"description":"Separation from host galaxy nucleus in arcseonds", 
+                    "type":"float"
+                },
+                "comments": {"description":"Deprecated since roughly 2015", 
+                    "type":"string"
+                },
+                "url": {"description":"url to the cross matches catalogue (TNS in this case)", 
+                    "type":"string"
+                },
+                "host_z": {"description":"Just whats displayed on TNS if available.", 
+                    "type":"float"
+                },
+                "object_z": {"description":"Just what's displayed on TNS if available. Could be different if transient is not related to 'host' (e.g. they were chance alignmenet and a later spectrum of transient confirmed different redshift)", 
+                    "type":"float"
+                }, 
+                "disc_date": {"description":"Discovery date - as reported by TNS (or other surveys) - UT", 
+                    "type":"Date and time"
+                },
+                "disc_filter": {"description":"Discovery filter",
+                    "type":"string"
+                }
+            }
+        },
+        "external_crossmatches":{
+            "description": "Same schema as above but everything that is not TNS (if not in ATEL or PESSTO, etc, this will be empty)",
+            "type": "List of dictionaries"
+        }
+    }
+
+}

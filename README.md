@@ -16,7 +16,7 @@ This is the first public release of the VRA data and models, previous iterations
 
 ### Requirements:
 ```
-matplotlib, numpy, pandas, scikit-leanrn, joblib, atlasvras
+matplotlib, numpy, pandas, scikit-leanrn, joblib, atlasvras, atlasapiclient
 ```
 
 # Description

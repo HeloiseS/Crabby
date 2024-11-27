@@ -2,6 +2,11 @@
 Release Date: **TBD**
 Training data gathered between: 27th March 2024 - 13th August 2024
 
+# TODO:
+- [ ] Call the test set the validation set, so that we’re clear
+- [ ] Make yaml file with the requirements
+
+
 # Overview
 ##  Quick Summary
 
